@@ -22,6 +22,9 @@ class Contacto
     #[ORM\Column(length: 255)]
     private ?string $telefono = null;
 
+    #[ORM\ManyToOne(inversedBy: 'contactos')]
+    private ?provedor $provedor = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +70,18 @@ class Contacto
         $this->nombre = $nombre;
         $this->telefono = $telefono;
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getProvedor(): ?provedor
+    {
+        return $this->provedor;
+    }
+
+    public function setProvedor(?provedor $provedor): self
+    {
+        $this->provedor = $provedor;
 
         return $this;
     }
